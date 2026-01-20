@@ -111,7 +111,7 @@
     <p>
       As per annual tradition,<br>
       you are required to complete this
-      <b>official Valentine assessment</b>.
+      <b>official Valentine assessment</b>
       in order to be MY valentine for another year!
     </p>
     <button class="primary" onclick="q1()">Begin</button>
@@ -181,20 +181,42 @@
     `);
   }
 
-  function accepted() {
-    render(`
-      <h1>Application Approved 🫶🫶</h1>
-      <p>
-        Congratulations Tash,<br>
-        you are officially my Valentine!!!!
-      </p>
-      <h2>I love you ❤️</h2>
-      </p?
-      <p> Failure was never an option <p>
-    `);
+  unction accepted() {
+  const today = new Date().toLocaleDateString("en-GB");
 
-    confetti();
-  }
+  render(`
+    <h1>Application Approved 💞</h1>
+    <p>Congratulations Tash,<br>your request has been accepted.</p>
+
+    <div style="
+      border: 3px solid #ff4d6d;
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 20px;
+      background: linear-gradient(135deg, #fff0f3, #ffe5ec);
+    ">
+      <h2 style="margin-top:0;">Certificate of Valentine Commitment 💖</h2>
+
+      <p><b>Issued to:</b><br>Tash</p>
+      <p><b>For:</b><br>Successfully passing the Valentine Compatibility Test</p>
+      <p><b>Valid from:</b><br>${today}</p>
+      <p><b>Status:</b><br>Official Valentine</p>
+
+      <hr style="border:none;border-top:1px solid #ffb3c1;">
+
+      <p style="margin-bottom:0;">
+        Signed with love,<br>
+        <b>Your Boyfriend ❤️</b>
+      </p>
+    </div>
+
+    <p style="margin-top:15px;font-size:13px;color:#777;">
+      This certificate is non-transferable and legally binding. Please save this for your records.*
+    </p>
+  `);
+
+  confetti();
+}
 
   function confetti() {
     for (let i = 0; i < 100; i++) {
