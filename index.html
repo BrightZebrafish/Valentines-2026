@@ -92,27 +92,45 @@
       to {
         transform: translateY(110vh) rotate(360deg);
       }
-    @keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
+/* FULL SCREEN FLASH */
+#flashOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: red;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
 }
-.flash {
-  animation: flashRed 0.2s infinite;
+
+.flash-active {
+  animation: flashRed 0.15s alternate 6;
 }
 
 @keyframes flashRed {
-  0% { background: #ff758c; }
-  50% { background: #ff0000; }
-  100% { background: #ff758c; }
+  from { opacity: 0; }
+  to { opacity: 0.6; }
+}
+
+/* CARD SHAKE */
+.shake {
+  animation: shakeCard 0.4s;
+}
+
+@keyframes shakeCard {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  75% { transform: translateX(-8px); }
+  100% { transform: translateX(0); }
 }
     }
   </style>
 </head>
 <body>
-
+<div id="flashOverlay"></div>
 <div class="card" id="app"></div>
 
 <script>
@@ -341,21 +359,24 @@ function sealEasterEgg() {
     egg.remove();
   }, 3500);
 }
-
 function someoneElse() {
-  // Play dramatic error sound
   const audio = new Audio("error.mp3");
   audio.play();
 
-  // Screen shake
-  document.body.style.animation = "shake 0.4s";
+  const card = document.querySelector(".card");
+  const flash = document.getElementById("flashOverlay");
 
-  // Flash effect
-  document.body.classList.add("flash");
+  // Trigger shake
+  card.classList.add("shake");
 
+  // Trigger flash
+  flash.classList.add("flash-active");
+
+  // Clean up animations
   setTimeout(() => {
-    document.body.classList.remove("flash");
-  }, 1200);
+    card.classList.remove("shake");
+    flash.classList.remove("flash-active");
+  }, 900);
 
   // Fake error screen
   setTimeout(() => {
@@ -367,18 +388,18 @@ function someoneElse() {
       </p>
 
       <p style="font-size:14px;color:#666;">
-        Please remain calm.<br>
-        Your Valentine is being reassigned…
+        This incident has been logged.<br>
+        Reassigning Valentine…
       </p>
     `);
-  }, 300);
+  }, 400);
 
   // Auto-correct
   setTimeout(() => {
     render(`
-      <h2>Correction Successful ✅</h2>
+      <h2>Correction Complete ✅</h2>
       <p>
-        Thank you for your patience, Tash.<br>
+        Thank you for your cooperation, Tash.<br>
         Your Valentine has been set to:
       </p>
 
@@ -386,8 +407,9 @@ function someoneElse() {
 
       <button class="primary" onclick="q2()">Continue</button>
     `);
-  }, 2800);
+  }, 2600);
 }
+
   
 </script>
 
