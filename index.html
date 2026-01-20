@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Valentine Check 💕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tash’s Valentine Test 💘</title>
 
   <style>
     body {
@@ -13,17 +14,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow-x: hidden;
     }
 
     .card {
       background: white;
       width: 90%;
       max-width: 420px;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      border-radius: 22px;
+      padding: 25px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
       text-align: center;
-      animation: fadeIn 0.6s ease;
+      animation: fadeIn 0.5s ease;
+      position: relative;
     }
 
     h1, h2 {
@@ -32,17 +35,18 @@
 
     p {
       color: #555;
+      line-height: 1.5;
     }
 
     button {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       margin: 10px 0;
       font-size: 16px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: none;
       cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
+      transition: transform 0.15s, background 0.2s;
     }
 
     button:hover {
@@ -60,8 +64,14 @@
 
     img {
       width: 100%;
-      border-radius: 15px;
-      margin: 10px 0;
+      border-radius: 16px;
+      margin: 8px 0;
+    }
+
+    #no {
+      background: #ccc;
+      position: absolute;
+      width: 120px;
     }
 
     @keyframes fadeIn {
@@ -69,10 +79,19 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    #no {
-      background: #ccc;
-      position: absolute;
-      width: 120px;
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      top: -10px;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
     }
   </style>
 </head>
@@ -81,83 +100,109 @@
 <div class="card" id="app"></div>
 
 <script>
-  let step = 0;
-
   const app = document.getElementById("app");
 
-  function next(content) {
+  function render(content) {
     app.innerHTML = content;
   }
 
-  // Step 0 – Intro
-  next(`
-    <h1>Valentine Compatibility Test 💘</h1>
+  render(`
+    <h1>Hello Tash 💕</h1>
     <p>
-      Before proceeding, you must complete this
-      <b>very serious</b> assessment.
+      As per annual tradition,<br>
+      you are required to complete this
+      <b>official Valentine assessment</b>.
     </p>
-    <button class="primary" onclick="step1()">Begin</button>
+    <button class="primary" onclick="q1()">Begin</button>
   `);
 
-  function step1() {
-    next(`
+  function q1() {
+    render(`
       <h2>Question 1</h2>
-      <p>Who is the best boyfriend?</p>
-      <button class="secondary" onclick="step2()">You 🥰</button>
-      <button class="secondary" onclick="step2()">Also you 😌</button>
+      <p>Who is your Valentine?</p>
+      <button class="secondary" onclick="q2()">You 🥰</button>
+      <button class="secondary" onclick="q2()">The same person as last year 😌</button>
     `);
   }
 
-  function step2() {
-    next(`
+  function q2() {
+    render(`
       <h2>Question 2</h2>
-      <p>How long have we been together?</p>
-      <button class="secondary" onclick="step3()">1 year & 3 months 💕</button>
-      <button class="secondary" onclick="step3()">Long enough to be obsessed</button>
+      <p>Do you agree this relationship is legally binding?</p>
+      <button class="secondary" onclick="photos()">Yes</button>
+      <button class="secondary" onclick="photos()">I guess so 😳</button>
     `);
   }
 
-  function step3() {
-    next(`
-      <h2>Important Evidence 📸</h2>
-      <p>For reference:</p>
+  function photos() {
+    render(`
+      <h2>Supporting Evidence 📸</h2>
+      <p>Please review the following:</p>
 
       <img src="photo1.jpg">
       <img src="photo2.jpg">
 
-      <button class="primary" onclick="finalStep()">Continue</button>
+      <button class="primary" onclick="final()">Continue</button>
     `);
   }
 
-  function finalStep() {
-    next(`
+  function final() {
+    render(`
       <h1>Final Question 💖</h1>
       <h2>Will you be my Valentine?</h2>
 
-      <button class="primary" onclick="accepted()">Yes 💕</button>
+      <button class="primary" onclick="areYouSure()">Yes 💕</button>
       <button id="no">No ❌</button>
     `);
 
     const noBtn = document.getElementById("no");
     noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 50);
+      const x = Math.random() * (window.innerWidth - 140);
+      const y = Math.random() * (window.innerHeight - 60);
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
     });
   }
 
+  function areYouSure() {
+    render(`
+      <h2>Are you sure? 😇</h2>
+      <p>
+        This action is permanent and will result in:
+        <br>• Love
+        <br>• Affection
+        <br>• Me being smug
+      </p>
+      <button class="primary" onclick="accepted()">Yes, I’m sure 💘</button>
+      <button class="secondary" onclick="final()">Let me think…</button>
+    `);
+  }
+
   function accepted() {
-    document.body.innerHTML = `
-      <div class="card">
-        <h1>Compatibility: 100% 💞</h1>
-        <p>
-          Congratulations!<br>
-          You have officially agreed to be my Valentine (again).
-        </p>
-        <h2>I love you ❤️</h2>
-      </div>
-    `;
+    render(`
+      <h1>Application Approved 💞</h1>
+      <p>
+        Congratulations Tash,<br>
+        you are officially my Valentine.
+      </p>
+      <h2>I love you ❤️</h2>
+    `);
+
+    confetti();
+  }
+
+  function confetti() {
+    for (let i = 0; i < 100; i++) {
+      const c = document.createElement("div");
+      c.classList.add("confetti");
+      c.style.left = Math.random() * 100 + "vw";
+      c.style.backgroundColor =
+        ["#ff4d6d", "#ffd6e0", "#ff9a9e"][Math.floor(Math.random() * 3)];
+      c.style.animationDuration = (Math.random() * 2 + 2) + "s";
+      document.body.appendChild(c);
+
+      setTimeout(() => c.remove(), 3000);
+    }
   }
 </script>
 
