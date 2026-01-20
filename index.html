@@ -192,7 +192,7 @@ function accepted() {
   const serial = "VAL-" + Math.floor(Math.random() * 1000000);
 
   render(`
-    <h1>Application Approved 💞</h1>
+    <h1>Application Approved 🫶🫶</h1>
     <p>Congratulations, your application has been approved, you can find your certificate below.</p>
 
     <div style="
@@ -205,26 +205,26 @@ function accepted() {
       text-align: center;
     ">
 
-      <!-- Seal -->
-      <div style="
-        position: absolute;
-        top: -18px;
-        right: -18px;
-        background: #ff4d6d;
-        color: white;
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        font-weight: bold;
-        transform: rotate(12deg);
-        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-      ">
-        OFFICIAL
-      </div>
+<div onclick="sealEasterEgg()" style="
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  background: #ff4d6d;
+  color: white;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  transform: rotate(12deg);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+">
+  OFFICIAL
+</div>
 
       <h2 style="margin-top:0;">Certificate of Valentine Commitment 💖</h2>
 
@@ -262,7 +262,7 @@ function accepted() {
       font-size:12px;
       color:#999;
     ">
-      >i>Failure to comply may result in excessive affection.>i>
+      <i>Failure to comply may result in excessive affection.<i>
     </p>
 
     <p style="
@@ -291,6 +291,39 @@ function accepted() {
       setTimeout(() => c.remove(), 3000);
     }
   }
+
+function sealEasterEgg() {
+  const egg = document.createElement("div");
+
+  egg.innerHTML = `
+    😈<br>
+    <b>Secret Discovered</b><br>
+    You were always my Valentine.<br>
+    This was just a formality 💕
+  `;
+
+  egg.style.position = "fixed";
+  egg.style.bottom = "20px";
+  egg.style.left = "50%";
+  egg.style.transform = "translateX(-50%)";
+  egg.style.background = "white";
+  egg.style.padding = "15px 20px";
+  egg.style.borderRadius = "16px";
+  egg.style.boxShadow = "0 10px 25px rgba(0,0,0,0.3)";
+  egg.style.textAlign = "center";
+  egg.style.zIndex = "9999";
+  egg.style.animation = "fadeIn 0.3s ease";
+
+  document.body.appendChild(egg);
+
+  // Extra mini confetti
+  confetti();
+
+  setTimeout(() => {
+    egg.remove();
+  }, 3500);
+}
+  
 </script>
 
 </body>
