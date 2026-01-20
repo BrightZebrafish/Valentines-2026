@@ -181,42 +181,105 @@
     `);
   }
 
-  function accepted() {
-  const today = new Date().toLocaleDateString("en-GB");
+function accepted() {
+  const today = new Date();
+  const issueDate = today.toLocaleDateString("en-GB");
+
+  const renewal = new Date(today);
+  renewal.setFullYear(today.getFullYear() + 1);
+  const renewalDate = renewal.toLocaleDateString("en-GB");
+
+  const serial = "VAL-" + Math.floor(Math.random() * 1000000);
 
   render(`
-    <h1>Application Approved 💞</h1>
-    <p>Congratulations Tash,<br>your request has been accepted.</p>
+    <h1>Approved 💞</h1>
+    <p>Your response has been recorded.</p>
 
     <div style="
+      position: relative;
       border: 3px solid #ff4d6d;
-      border-radius: 18px;
-      padding: 20px;
+      border-radius: 20px;
+      padding: 22px;
       margin-top: 20px;
       background: linear-gradient(135deg, #fff0f3, #ffe5ec);
+      text-align: center;
     ">
+
+      <!-- Seal -->
+      <div style="
+        position: absolute;
+        top: -18px;
+        right: -18px;
+        background: #ff4d6d;
+        color: white;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+        transform: rotate(12deg);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      ">
+        OFFICIAL
+      </div>
+
       <h2 style="margin-top:0;">Certificate of Valentine Commitment 💖</h2>
 
-      <p><b>Issued to:</b><br>Tash</p>
-      <p><b>For:</b><br>Successfully passing the Valentine Compatibility Test</p>
-      <p><b>Valid from:</b><br>${today}</p>
-      <p><b>Status:</b><br>Official Valentine</p>
+      <p><b>Issued To:</b><br>Tash</p>
+      <p><b>Reason:</b><br>Successfully passed the Valentine Compatibility Test</p>
 
-      <hr style="border:none;border-top:1px solid #ffb3c1;">
+      <p><b>Status:</b><br>
+        <span style="color:#ff4d6d;font-weight:bold;">
+          Official Valentine
+        </span>
+      </p>
 
-      <p style="margin-bottom:0;">
-        Signed with love,<br>
+      <p><b>Issue Date:</b><br>${issueDate}</p>
+      <p><b>Renewal Date:</b><br>${renewalDate}</p>
+
+      <p style="font-size:13px;color:#666;">
+        Certificate No: ${serial}
+      </p>
+
+      <hr style="border:none;border-top:1px solid #ffb3c1;margin:15px 0;">
+
+      <p>
+        Signed with love (and authority),<br>
         <b>Your Boyfriend ❤️</b>
       </p>
     </div>
 
-    <p style="margin-top:15px;font-size:13px;color:#777;">
-      This certificate is non-transferable and legally binding. Please save this for your records.*
+    <p style="
+      margin-top:15px;
+      font-size:13px;
+      color:#777;
+    ">
+      This certificate is non-transferable, non-refundable,
+      and legally binding under the laws of Valentine’s Day.*
+    </p>
+
+    <p style="
+      font-size:12px;
+      color:#999;
+    ">
+      *Failure to comply may result in excessive affection.
+    </p>
+
+    <p style="
+      margin-top:10px;
+      font-size:14px;
+      font-weight:bold;
+    ">
+      📸 Please screenshot this for your records
     </p>
   `);
 
   confetti();
 }
+
 
   function confetti() {
     for (let i = 0; i < 100; i++) {
