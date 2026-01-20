@@ -92,6 +92,13 @@
       to {
         transform: translateY(110vh) rotate(360deg);
       }
+    @keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
     }
   </style>
 </head>
@@ -118,13 +125,14 @@
   `);
 
   function q1() {
-    render(`
-      <h2>Question 1</h2>
-      <p>Who would you like to be your Valentine?</p>
-      <button class="secondary" onclick="q2()">You 🥰</button>
-      <button class="secondary" onclick="q2()">The same person as last year 😌</button>
-    `);
-  }
+  render(`
+    <h2>Question 1</h2>
+    <p>Who would you like to be your Valentine?</p>
+
+    <button class="secondary" onclick="q2()">Me (Finn) </button>
+    <button class="secondary" onclick="someoneElse()">Someone else 😬</button>
+  `);
+}
 
   function q2() {
     render(`
@@ -323,6 +331,41 @@ function sealEasterEgg() {
   setTimeout(() => {
     egg.remove();
   }, 3500);
+}
+
+function someoneElse() {
+  // Screen shake
+  document.body.style.animation = "shake 0.4s";
+
+  // Fake error takeover
+  setTimeout(() => {
+    render(`
+      <h1 style="color:#ff4d6d;">⚠️ ERROR ⚠️</h1>
+      <p>
+        Invalid response detected.<br><br>
+        <b>"Someone else"</b> is not a recognised option.
+      </p>
+
+      <p style="font-size:14px;color:#666;">
+        Redirecting you to the correct answer…
+      </p>
+    `);
+  }, 200);
+
+  // Auto-correct back to Finn
+  setTimeout(() => {
+    render(`
+      <h2>Corrected ✅</h2>
+      <p>
+        Thank you for your cooperation, Tash.<br>
+        Your Valentine has been set to:
+      </p>
+
+      <h1>Finn 💘</h1>
+
+      <button class="primary" onclick="q2()">Continue</button>
+    `);
+  }, 2500);
 }
   
 </script>
