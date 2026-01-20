@@ -107,11 +107,12 @@
   }
 
   render(`
-    <h1>Hello Tash 💕</h1>
+    <h1>Hello Tash 👋</h1>
     <p>
       As per annual tradition,<br>
       you are required to complete this
       <b>official Valentine assessment</b>.
+      in order to be MY valentine for another year!
     </p>
     <button class="primary" onclick="q1()">Begin</button>
   `);
@@ -119,7 +120,7 @@
   function q1() {
     render(`
       <h2>Question 1</h2>
-      <p>Who is your Valentine?</p>
+      <p>Who would you like to be your Valentine?</p>
       <button class="secondary" onclick="q2()">You 🥰</button>
       <button class="secondary" onclick="q2()">The same person as last year 😌</button>
     `);
@@ -141,7 +142,7 @@
 
       <img src="photo1.jpg">
       <img src="photo2.jpg">
-
+       <p> This will help you understand who you are choosing and if you wish to proceed.... <p>
       <button class="primary" onclick="final()">Continue</button>
     `);
   }
@@ -151,14 +152,14 @@
       <h1>Final Question 💖</h1>
       <h2>Will you be my Valentine?</h2>
 
-      <button class="primary" onclick="areYouSure()">Yes 💕</button>
+      <button class="primary" onclick="areYouSure()">Yes!!!</button>
       <button id="no">No ❌</button>
     `);
 
     const noBtn = document.getElementById("no");
     noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - 140);
-      const y = Math.random() * (window.innerHeight - 60);
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 50);
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
     });
@@ -171,21 +172,25 @@
         This action is permanent and will result in:
         <br>• Love
         <br>• Affection
-        <br>• Me being smug
+        <br>• Me being annoying
+        <br>• Ragebaiting
+        <br>• Lots of kisses and cuddles
       </p>
-      <button class="primary" onclick="accepted()">Yes, I’m sure 💘</button>
+      <button class="primary" onclick="accepted()">Yes, I’m sure!!</button>
       <button class="secondary" onclick="final()">Let me think…</button>
     `);
   }
 
   function accepted() {
     render(`
-      <h1>Application Approved 💞</h1>
+      <h1>Application Approved 🫶🫶</h1>
       <p>
         Congratulations Tash,<br>
-        you are officially my Valentine.
+        you are officially my Valentine!!!!
       </p>
       <h2>I love you ❤️</h2>
+      </p?
+      <p> Failure was never an option <p>
     `);
 
     confetti();
