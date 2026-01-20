@@ -99,6 +99,15 @@
   75% { transform: translateX(-5px); }
   100% { transform: translateX(0); }
 }
+.flash {
+  animation: flashRed 0.2s infinite;
+}
+
+@keyframes flashRed {
+  0% { background: #ff758c; }
+  50% { background: #ff0000; }
+  100% { background: #ff758c; }
+}
     }
   </style>
 </head>
@@ -334,30 +343,42 @@ function sealEasterEgg() {
 }
 
 function someoneElse() {
+  // Play dramatic error sound
+  const audio = new Audio("error.mp3");
+  audio.play();
+
   // Screen shake
   document.body.style.animation = "shake 0.4s";
 
-  // Fake error takeover
+  // Flash effect
+  document.body.classList.add("flash");
+
+  setTimeout(() => {
+    document.body.classList.remove("flash");
+  }, 1200);
+
+  // Fake error screen
   setTimeout(() => {
     render(`
-      <h1 style="color:#ff4d6d;">⚠️ ERROR ⚠️</h1>
+      <h1 style="color:#ff4d6d;">🚨 SYSTEM ERROR 🚨</h1>
       <p>
-        Invalid response detected.<br><br>
-        <b>"Someone else"</b> is not a recognised option.
+        Invalid selection detected.<br><br>
+        <b>“Someone else”</b> is not an approved option.
       </p>
 
       <p style="font-size:14px;color:#666;">
-        Redirecting you to the correct answer…
+        Please remain calm.<br>
+        Your Valentine is being reassigned…
       </p>
     `);
-  }, 200);
+  }, 300);
 
-  // Auto-correct back to Finn
+  // Auto-correct
   setTimeout(() => {
     render(`
-      <h2>Corrected ✅</h2>
+      <h2>Correction Successful ✅</h2>
       <p>
-        Thank you for your cooperation, Tash.<br>
+        Thank you for your patience, Tash.<br>
         Your Valentine has been set to:
       </p>
 
@@ -365,7 +386,7 @@ function someoneElse() {
 
       <button class="primary" onclick="q2()">Continue</button>
     `);
-  }, 2500);
+  }, 2800);
 }
   
 </script>
